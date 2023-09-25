@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euxo pipefail
+
+# Set current working directory to where this script lives
+cd "$(dirname -- "$0")"
+
+# Use the directory dist/ to merge src-1/ & src-2/...
+
+# Mirror the contents of src-1/ to dist/
+rsync --archive --verbose --delete --exclude=.DS_Store src-1/ dist/
+
+# Merge in src-2/... will overwrite conflicts from src-1/ unless excluded
+rsync --archive --verbose --exclude=.DS_Store --exclude=404.html src-2/ dist/
+
+# Now mirror the *contents* of dist/ to dest/ (not deleting 3rd party dirs/files)
+rsync --archive --verbose --delete --compress --progress --exclude=.DS_Store dist/* dest/
