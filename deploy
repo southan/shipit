@@ -15,4 +15,4 @@ rsync --archive --verbose --delete --exclude=.DS_Store src-1/ dist/
 rsync --archive --verbose --exclude=.DS_Store --exclude=404.html src-2/ dist/
 
 # Now mirror the *contents* of dist/ to dest/ (not deleting 3rd party dirs/files)
-rsync --archive --verbose --delete --compress --progress --exclude=.DS_Store dist/* dest/
+rsync --archive --verbose --delete --compress --progress --exclude=.DS_Store dist/* target/
